@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
 var sourcemaps = require('gulp-sourcemaps');
+var ghPages = require('gulp-gh-pages');
 
 gulp.task('sass', function() {
     return gulp.src('scss/*.scss')
@@ -17,6 +18,11 @@ gulp.task('sass', function() {
 
 gulp.task('default', gulp.series('sass'), function () {
 });
+
+gulp.task('deploy', function() {
+    return gulp.src('./**')
+    .pipe(ghPages());
+})
 
 gulp.task('watch', function(){
     gulp.watch('scss/**/*.scss', gulp.series('sass'));
